@@ -44,10 +44,11 @@ void DrawSnake(HDC hdc) {
 }
 
 void UpdateDir(E_SnakeDir newSnakeDir) {
-  if(lockInput) return;
+  if(lockInput) return; // prevent input before snake moves
 
   lockInput = TRUE;
 
+  // prevent snake turning back into itself
   if (newSnakeDir == SNAKEDIR_UP && snakeDir == SNAKEDIR_DOWN) {
     return;
   } 
@@ -127,7 +128,8 @@ void MoveSnake() {
 
 BOOL CheckSnakeCollision(INT16 x, INT16 y) {
   P_SnakeNode curr = head->next;
-  
+
+  // iterate through each node and check if coords match  
   while(curr) {
     if(curr->x == x && curr->y == y) {
       return TRUE;
@@ -140,15 +142,18 @@ BOOL CheckSnakeCollision(INT16 x, INT16 y) {
 }
 
 void InitSnake() {
+  // create head node
   if((head = CreateNode()) == NULL) {
     MessageBox(NULL, _T("Error initializing snake"), "caption", 0);
     exit(1);
   }
 
+  // init head in the middle of the grid
   head->x = (NUM_COLS / 2) - 1;
   head->y = (NUM_ROWS / 2) - 1;
   tail = head;
 
+  // create brushes for head and body of snake
   snakeHeadBrush = CreateSolidBrush(SNAKE_HEAD_COLOUR);
   snakeBodyBrush = CreateSolidBrush(SNAKE_BODY_COLOUR);
 }
@@ -156,12 +161,14 @@ void InitSnake() {
 void DestroySnake() {
   P_SnakeNode next;
 
+  // de-allocate nodes
   while(head) {
     next = head->next;
     free(head);
     head = next;
   }
 
+  // destroy objects
   DeleteObject(snakeBodyBrush);
   DeleteObject(snakeHeadBrush);
 }

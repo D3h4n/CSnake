@@ -7,4 +7,4 @@ $(TARGET): main.c
 	$(CC) $^ -o $@ $(CFLAGS)
 
 clean:
-	rm -f *.exe
+	rm -f $(TARGET)
