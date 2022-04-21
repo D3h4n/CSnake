@@ -3,9 +3,6 @@
 #include "handles.c"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-  // Hide console window
-  ShowWindow(GetConsoleWindow(), SW_HIDE); 
-
   static TCHAR szWindowClass[] = _T("DesktopApp");
   static TCHAR szTitle[] = _T("Snake");
   MSG msg;
@@ -80,6 +77,5 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
   DestroyGame();
   
   // Show console window
-  ShowWindow(GetConsoleWindow(), SW_SHOW); 
   return (int) msg.wParam;
 }

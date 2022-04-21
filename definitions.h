@@ -1,6 +1,7 @@
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
+#include <windows.h>
 #include <wingdi.h>
 #include <tchar.h>
 #include <stdio.h>
